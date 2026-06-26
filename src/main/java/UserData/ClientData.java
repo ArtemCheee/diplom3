@@ -1,3 +1,5 @@
+package UserData;
+
 import com.github.javafaker.Faker;
 
 
@@ -20,6 +22,14 @@ import com.github.javafaker.Faker;
 
         public static String generateWrongRandomPassword() {
             return user.regexify("[0-9]{2}");
+        }
+
+        public static ClientModel generateRandomUser() {
+            return new ClientModel(
+                    generateRandomName(),
+                    generateRandomEmail(),
+                    generateRandomPassword()
+            );
         }
 
     }

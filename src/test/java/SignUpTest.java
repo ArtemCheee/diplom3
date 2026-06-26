@@ -1,3 +1,5 @@
+import UserData.ClientData;
+import UserData.ClientModel;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import page.LoginPage;
@@ -14,26 +16,15 @@ public class SignUpTest extends BaseUiTest {
 
     public void successfulSignUpTest() throws InterruptedException{
 
-        String name = ClientData.generateRandomName();
-        String email = ClientData.generateRandomEmail();
-        String password = ClientData.generateRandomPassword();
+        ClientModel clientModel = ClientData.generateRandomUser();
 
-
-        MainPage mainPage = new MainPage(webDriver);
-        mainPage.ckickPersonalAccountButton();
-
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.clickSignUp();
-
-        SignUpPage signUpPage = new SignUpPage(webDriver);
-
-        signUpPage.enterName(name);
-        signUpPage.enterEmail(email);
-        signUpPage.enterPassword(password);
-        signUpPage.ckickSignUpButton();
+        new MainPage(webDriver).clickPersonalAccountButton();
+        new LoginPage(webDriver).clickSignUp();
+        new SignUpPage(webDriver).createClient(clientModel);
 
         Thread.sleep(2000);
 
+        LoginPage loginPage = new LoginPage(webDriver);
         assertTrue(loginPage.isLoginButtonDisplayed());
     }
 
@@ -48,7 +39,7 @@ public class SignUpTest extends BaseUiTest {
 
 
         MainPage mainPage = new MainPage(webDriver);
-        mainPage.ckickPersonalAccountButton();
+        mainPage.clickPersonalAccountButton();
 
         LoginPage loginPage = new LoginPage(webDriver);
         loginPage.clickSignUp();
@@ -58,7 +49,7 @@ public class SignUpTest extends BaseUiTest {
         signUpPage.enterName(name);
         signUpPage.enterEmail(email);
         signUpPage.enterPassword(password);
-        signUpPage.ckickSignUpButton();
+        signUpPage.clickSignUpButton();
 
         assertTrue(signUpPage.isWrongPasswordFailureDisplayed());
 

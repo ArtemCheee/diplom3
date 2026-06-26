@@ -7,13 +7,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class BaseUiTest {
 
     protected WebDriver webDriver;
-    private final static String MAIN_PAGE = "https://stellarburgers.education-services.ru/";
+    public final static String MAIN_PAGE = "https://stellarburgers.education-services.ru/";
 
     @Before
     public void startBrowser(){
         WebDriverManager.chromedriver().setup();
         this.webDriver = new ChromeDriver();
-        this.webDriver.get(this.MAIN_PAGE);
+        this.webDriver.get(MAIN_PAGE);
     }
 
     @After
