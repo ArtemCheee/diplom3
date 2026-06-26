@@ -12,6 +12,13 @@ public class LoginPage {
 
     private final By loginButton = By.xpath("//button[text()='Войти']");
 
+    private final By emailOnLoginPage = By.xpath("//input[@name='name']");
+
+    private final By passwordOnLoginPage = By.xpath("//input[@name='Пароль']");
+
+    private final By forgotPasswordButton = By.xpath("//a[contains(text(), 'Восстановить пароль')]");
+
+
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
@@ -27,4 +34,21 @@ public class LoginPage {
             return false;
         }
     }
+
+    public void enterEmail(String email){
+        webDriver.findElement(emailOnLoginPage).sendKeys(email);
+    }
+
+    public void enterPassword(String password){
+        webDriver.findElement(passwordOnLoginPage).sendKeys(password);
+    }
+
+    public void cliclLoginButton(){
+        webDriver.findElement(loginButton).click();
+    }
+
+    public void clickForgotPasswordButton(){
+        webDriver.findElement(forgotPasswordButton).click();
+    }
+
 }
