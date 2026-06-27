@@ -12,8 +12,6 @@ public class ConstructorNavigationTest extends BaseUiTest{
 
     public void bunTabNavigationTest(){
 
-        MainPage mainPage = new MainPage(webDriver);
-
         mainPage.clickConstructorSauceTab();
         mainPage.clickConstructorBunTab();
 
@@ -26,7 +24,6 @@ public class ConstructorNavigationTest extends BaseUiTest{
 
     public void sauceTabNavigationTest(){
 
-        MainPage mainPage = new MainPage(webDriver);
 
         mainPage.clickConstructorSauceTab();
 
@@ -39,7 +36,6 @@ public class ConstructorNavigationTest extends BaseUiTest{
 
     public void fillingTabNavigationTest(){
 
-        MainPage mainPage = new MainPage(webDriver);
 
         mainPage.clickConstructorFillingsTab();
 

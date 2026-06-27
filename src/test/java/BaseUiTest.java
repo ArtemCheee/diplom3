@@ -46,7 +46,6 @@ public class BaseUiTest {
             this.webDriver = new ChromeDriver();
         }
         this.webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        this.webDriver.manage().window().maximize();
 
         this.webDriver.get(MAIN_PAGE);
 
