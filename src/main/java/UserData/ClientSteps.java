@@ -13,8 +13,8 @@ public class ClientSteps {
 
     private static final String BASE_URL = "https://stellarburgers.education-services.ru";
 
-    @Step
-    @DisplayName("Создание клиента")
+    @Step("Создание клиента")
+
     public static Response createClient(ClientModel client) {
         return given()
                 .log().all()
@@ -29,8 +29,8 @@ public class ClientSteps {
     }
 
 
-    @Step
-    @DisplayName("Удаление клиента")
+    @Step("Удаление клиента")
+
 
     public static Response deleteClient(String accessToken) {
         return given()
@@ -44,8 +44,8 @@ public class ClientSteps {
 
     }
 
-    @Step
-    @DisplayName("Логин клиента")
+    @Step("Логин клиента")
+
     public static Response loginClient(ClientModel client) {
         return given()
                 .log().all()
