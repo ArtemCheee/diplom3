@@ -1,6 +1,8 @@
 import UserData.ClientData;
 import UserData.ClientModel;
+import UserData.ClientSteps;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.Response;
 import org.junit.Test;
 import page.ForgotPasswordPage;
 import page.LoginPage;
@@ -33,8 +35,12 @@ public class LoginTest extends BaseUiTest{
        loginPage.enterPassword(clientModel.getPassword());
        loginPage.cliclLoginButton();
 
+       Response loginResponse = ClientSteps.loginClient(clientModel);
+       accessToken = loginResponse.jsonPath().getString("accessToken");
+
        Thread.sleep(2000);
        assertTrue(mainPage.isMakeOrderButtonDisplayed());
+
 
    }
 
@@ -49,6 +55,9 @@ public class LoginTest extends BaseUiTest{
         new LoginPage(webDriver).clickSignUp();
         new SignUpPage(webDriver).createClient(clientModel);
 
+        Response createResponse = ClientSteps.createClient(clientModel);
+        accessToken = createResponse.jsonPath().getString("accessToken");
+
         webDriver.get(BaseUiTest.MAIN_PAGE);
 
         MainPage mainPage = new MainPage(webDriver);
@@ -59,6 +68,9 @@ public class LoginTest extends BaseUiTest{
         loginPage.enterEmail(clientModel.getEmail());
         loginPage.enterPassword(clientModel.getPassword());
         loginPage.cliclLoginButton();
+
+        Response loginResponse = ClientSteps.loginClient(clientModel);
+        accessToken = loginResponse.jsonPath().getString("accessToken");
 
         Thread.sleep(2000);
         assertTrue(mainPage.isMakeOrderButtonDisplayed());
@@ -76,6 +88,9 @@ public class LoginTest extends BaseUiTest{
         new LoginPage(webDriver).clickSignUp();
         new SignUpPage(webDriver).createClient(clientModel);
 
+        Response createResponse = ClientSteps.createClient(clientModel);
+        accessToken = createResponse.jsonPath().getString("accessToken");
+
         webDriver.get(BaseUiTest.MAIN_PAGE);
 
         MainPage mainPage = new MainPage(webDriver);
@@ -90,6 +105,9 @@ public class LoginTest extends BaseUiTest{
         loginPage.enterEmail(clientModel.getEmail());
         loginPage.enterPassword(clientModel.getPassword());
         loginPage.cliclLoginButton();
+
+        Response loginResponse = ClientSteps.loginClient(clientModel);
+        accessToken = loginResponse.jsonPath().getString("accessToken");
 
         Thread.sleep(2000);
         assertTrue(mainPage.isMakeOrderButtonDisplayed());
@@ -108,6 +126,9 @@ public class LoginTest extends BaseUiTest{
         new LoginPage(webDriver).clickSignUp();
         new SignUpPage(webDriver).createClient(clientModel);
 
+        Response createResponse = ClientSteps.createClient(clientModel);
+        accessToken = createResponse.jsonPath().getString("accessToken");
+
         webDriver.get(BaseUiTest.MAIN_PAGE);
 
         MainPage mainPage = new MainPage(webDriver);
@@ -122,6 +143,9 @@ public class LoginTest extends BaseUiTest{
         loginPage.enterEmail(clientModel.getEmail());
         loginPage.enterPassword(clientModel.getPassword());
         loginPage.cliclLoginButton();
+
+        Response loginResponse = ClientSteps.loginClient(clientModel);
+        accessToken = loginResponse.jsonPath().getString("accessToken");
 
         Thread.sleep(2000);
         assertTrue(mainPage.isMakeOrderButtonDisplayed());

@@ -1,9 +1,12 @@
+import UserData.ClientModel;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import static UserData.ClientSteps.deleteClient;
 
 public class BaseUiTest {
 
@@ -12,6 +15,7 @@ public class BaseUiTest {
 
     private static final boolean USE_YANDEX = false;
 
+    protected String accessToken;
 
     @Before
 
@@ -28,11 +32,21 @@ public class BaseUiTest {
         this.webDriver.get(MAIN_PAGE);
     }
 
+
     @After
+    public void deleteClientAfterTest() {
 
-    public void tearDown(){
+        if (accessToken != null && !accessToken.isEmpty()) {
+            try {
+                deleteClient(accessToken);
 
-        webDriver.quit();
+            } catch (Exception e) {
+                System.out.println("Ошибка при удалении: " + e.getMessage());
+            }
+        }
+
+        if (webDriver != null) {
+            webDriver.quit();
+          }
     }
-
 }

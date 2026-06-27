@@ -5,6 +5,11 @@ import com.github.javafaker.Faker;
 
     public class ClientData {
 
+
+        public static final String CREATE_CLIENT_PATH = "/api/auth/register";
+        public static final String LOGIN_CLIENT_PATH = "/api/auth/login";
+        public static final String DELETE_CLIENT_PATH = "/api/auth/user";
+
         static Faker user = new Faker();
 
         public static String generateRandomEmail() {
@@ -30,6 +35,9 @@ import com.github.javafaker.Faker;
                     generateRandomEmail(),
                     generateRandomPassword()
             );
+
+
         }
+
 
     }

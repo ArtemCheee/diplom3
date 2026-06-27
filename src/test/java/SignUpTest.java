@@ -1,6 +1,8 @@
 import UserData.ClientData;
 import UserData.ClientModel;
+import UserData.ClientSteps;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.Response;
 import org.junit.Test;
 import page.LoginPage;
 import page.MainPage;
@@ -21,6 +23,9 @@ public class SignUpTest extends BaseUiTest {
         new MainPage(webDriver).clickPersonalAccountButton();
         new LoginPage(webDriver).clickSignUp();
         new SignUpPage(webDriver).createClient(clientModel);
+
+        Response loginResponse = ClientSteps.loginClient(clientModel);
+        accessToken = loginResponse.jsonPath().getString("accessToken");
 
         Thread.sleep(2000);
 
