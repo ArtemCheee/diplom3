@@ -7,13 +7,13 @@ public class ForgotPasswordPage {
 
     private final WebDriver webDriver;
 
-    private final By forgotPasswordPageLoginButton = By.xpath("//a[contains(text(), 'Войти')]");
+    private final By FORGOT_PASSWORD_PAGE_LOGIN_BUTTON = By.xpath("//a[contains(text(), 'Войти')]");
 
     public ForgotPasswordPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
     public void clickForgotPasswordPageLoginButton(){
-        webDriver.findElement(forgotPasswordPageLoginButton).click();
+        webDriver.findElement(FORGOT_PASSWORD_PAGE_LOGIN_BUTTON).click();
 }
 }
