@@ -1,13 +1,7 @@
-import UserData.ClientData;
-import UserData.ClientModel;
-import UserData.ClientSteps;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.response.Response;
 import org.junit.Test;
 import page.ForgotPasswordPage;
-import page.LoginPage;
-import page.MainPage;
-import page.SignUpPage;
+
 
 import static org.junit.Assert.assertTrue;
 
@@ -16,29 +10,16 @@ public class LoginTest extends BaseUiTest{
    @Test
    @DisplayName("вход по кнопке «Войти в аккаунт» на главной")
 
-   public void loginByMainPageLoginButtonTest() throws InterruptedException{
+   public void loginByMainPageLoginButtonTest() {
 
-       ClientModel clientModel = ClientData.generateRandomUser();
-
-       new MainPage(webDriver).clickPersonalAccountButton();
-       new LoginPage(webDriver).clickSignUp();
-       new SignUpPage(webDriver).createClient(clientModel);
+       createClientBefore();
 
        webDriver.get(BaseUiTest.MAIN_PAGE);
 
-       MainPage mainPage = new MainPage(webDriver);
-
        mainPage.clickMainPageLoginButton();
 
-       LoginPage loginPage = new LoginPage(webDriver);
-       loginPage.enterEmail(clientModel.getEmail());
-       loginPage.enterPassword(clientModel.getPassword());
-       loginPage.cliclLoginButton();
+       loginPage.createClient(client);
 
-       Response loginResponse = ClientSteps.loginClient(clientModel);
-       accessToken = loginResponse.jsonPath().getString("accessToken");
-
-       Thread.sleep(2000);
        assertTrue(mainPage.isMakeOrderButtonDisplayed());
 
 
@@ -47,32 +28,17 @@ public class LoginTest extends BaseUiTest{
     @Test
     @DisplayName("вход через кнопку «Личный кабинет»")
 
-    public void loginByMainPagePersonalAccountButtonTest() throws InterruptedException{
+    public void loginByMainPagePersonalAccountButtonTest(){
 
-        ClientModel clientModel = ClientData.generateRandomUser();
-
-        new MainPage(webDriver).clickPersonalAccountButton();
-        new LoginPage(webDriver).clickSignUp();
-        new SignUpPage(webDriver).createClient(clientModel);
-
-        Response createResponse = ClientSteps.createClient(clientModel);
-        accessToken = createResponse.jsonPath().getString("accessToken");
+        createClientBefore();
 
         webDriver.get(BaseUiTest.MAIN_PAGE);
 
-        MainPage mainPage = new MainPage(webDriver);
-
         mainPage.clickPersonalAccountButton();
 
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.enterEmail(clientModel.getEmail());
-        loginPage.enterPassword(clientModel.getPassword());
-        loginPage.cliclLoginButton();
+        loginPage.createClient(client);
 
-        Response loginResponse = ClientSteps.loginClient(clientModel);
-        accessToken = loginResponse.jsonPath().getString("accessToken");
 
-        Thread.sleep(2000);
         assertTrue(mainPage.isMakeOrderButtonDisplayed());
 
     }
@@ -80,59 +46,33 @@ public class LoginTest extends BaseUiTest{
     @Test
     @DisplayName("вход через кнопку в форме регистрации")
 
-    public void loginBysignUpPageLoginButtonTest() throws InterruptedException{
+    public void loginBysignUpPageLoginButtonTest() {
 
-        ClientModel clientModel = ClientData.generateRandomUser();
-
-        new MainPage(webDriver).clickPersonalAccountButton();
-        new LoginPage(webDriver).clickSignUp();
-        new SignUpPage(webDriver).createClient(clientModel);
-
-        Response createResponse = ClientSteps.createClient(clientModel);
-        accessToken = createResponse.jsonPath().getString("accessToken");
+        createClientBefore();
 
         webDriver.get(BaseUiTest.MAIN_PAGE);
 
-        MainPage mainPage = new MainPage(webDriver);
-        LoginPage loginPage = new LoginPage(webDriver);
-        SignUpPage signUpPage = new SignUpPage(webDriver);
 
         mainPage.clickPersonalAccountButton();
         loginPage.clickSignUp();
         signUpPage.clickSignUpPageLoginButton();
 
+        loginPage.createClient(client);
 
-        loginPage.enterEmail(clientModel.getEmail());
-        loginPage.enterPassword(clientModel.getPassword());
-        loginPage.cliclLoginButton();
 
-        Response loginResponse = ClientSteps.loginClient(clientModel);
-        accessToken = loginResponse.jsonPath().getString("accessToken");
-
-        Thread.sleep(2000);
         assertTrue(mainPage.isMakeOrderButtonDisplayed());
 
     }
 
-
     @Test
     @DisplayName("вход через кнопку в форме восстановления пароля")
 
-    public void loginByForgotPasswordButtonTest() throws InterruptedException{
+    public void loginByForgotPasswordButtonTest() {
 
-        ClientModel clientModel = ClientData.generateRandomUser();
-
-        new MainPage(webDriver).clickPersonalAccountButton();
-        new LoginPage(webDriver).clickSignUp();
-        new SignUpPage(webDriver).createClient(clientModel);
-
-        Response createResponse = ClientSteps.createClient(clientModel);
-        accessToken = createResponse.jsonPath().getString("accessToken");
+        createClientBefore();
 
         webDriver.get(BaseUiTest.MAIN_PAGE);
 
-        MainPage mainPage = new MainPage(webDriver);
-        LoginPage loginPage = new LoginPage(webDriver);
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(webDriver);
 
         mainPage.clickPersonalAccountButton();
@@ -140,14 +80,13 @@ public class LoginTest extends BaseUiTest{
         forgotPasswordPage.clickForgotPasswordPageLoginButton();
 
 
-        loginPage.enterEmail(clientModel.getEmail());
-        loginPage.enterPassword(clientModel.getPassword());
-        loginPage.cliclLoginButton();
+        mainPage.clickPersonalAccountButton();
+        loginPage.clickForgotPasswordButton();
+        forgotPasswordPage.clickForgotPasswordPageLoginButton();
 
-        Response loginResponse = ClientSteps.loginClient(clientModel);
-        accessToken = loginResponse.jsonPath().getString("accessToken");
+        loginPage.createClient(client);
 
-        Thread.sleep(2000);
+
         assertTrue(mainPage.isMakeOrderButtonDisplayed());
 
     }

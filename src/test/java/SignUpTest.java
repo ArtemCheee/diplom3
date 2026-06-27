@@ -1,13 +1,12 @@
 import UserData.ClientData;
 import UserData.ClientModel;
-import UserData.ClientSteps;
-import io.qameta.allure.junit4.DisplayName;
-import io.restassured.response.Response;
-import org.junit.Test;
-import page.LoginPage;
-import page.MainPage;
-import page.SignUpPage;
 
+import io.qameta.allure.junit4.DisplayName;
+
+import org.junit.Test;
+
+
+import static UserData.ClientData.generateRandomUser;
 import static org.junit.Assert.assertTrue;
 
 public class SignUpTest extends BaseUiTest {
@@ -16,40 +15,31 @@ public class SignUpTest extends BaseUiTest {
     @Test
     @DisplayName("Успешная регистрация")
 
-    public void successfulSignUpTest() throws InterruptedException{
+    public void successfulSignUpTest() {
 
-        ClientModel clientModel = ClientData.generateRandomUser();
 
-        new MainPage(webDriver).clickPersonalAccountButton();
-        new LoginPage(webDriver).clickSignUp();
-        new SignUpPage(webDriver).createClient(clientModel);
+        ClientModel newClient = generateRandomUser();
 
-        Response loginResponse = ClientSteps.loginClient(clientModel);
-        accessToken = loginResponse.jsonPath().getString("accessToken");
+        mainPage.clickPersonalAccountButton();
+        loginPage.clickSignUp();
 
-        Thread.sleep(2000);
+        signUpPage.createClient(newClient);
 
-        LoginPage loginPage = new LoginPage(webDriver);
         assertTrue(loginPage.isLoginButtonDisplayed());
     }
 
     @Test
     @DisplayName("Ошибка для некорректного пароля")
 
-    public void WrongPasswordFailureSignUpTest() {
+    public void wrongPasswordFailureSignUpTest() {
 
         String name = ClientData.generateRandomName();
         String email = ClientData.generateRandomEmail();
         String password = ClientData.generateWrongRandomPassword();
 
-
-        MainPage mainPage = new MainPage(webDriver);
         mainPage.clickPersonalAccountButton();
 
-        LoginPage loginPage = new LoginPage(webDriver);
         loginPage.clickSignUp();
-
-        SignUpPage signUpPage = new SignUpPage(webDriver);
 
         signUpPage.enterName(name);
         signUpPage.enterEmail(email);
