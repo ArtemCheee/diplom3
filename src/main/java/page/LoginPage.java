@@ -1,15 +1,21 @@
 package page;
 
+import UserData.ClientModel;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import java.util.NoSuchElementException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage {
 
     private final WebDriver webDriver;
 
-    private final By SIGN_UP = By.xpath("/html/body/div/div/main/div/div/p[1]/a");
+    private final WebDriverWait wait;
+
+    private final By SIGN_UP = By.xpath("//p/a[text()='Зарегистрироваться']");
 
     private final By LOGIN_BUTTON = By.xpath("//button[text()='Войти']");
 
@@ -22,40 +28,51 @@ public class LoginPage {
 
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
+        this.wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
     }
 
-    @Step("Клик по кнопке Зарегистрироваться")
+    @Step("Клик по кнопке 'Зарегистрироваться'")
     public void clickSignUp() {
-        webDriver.findElement(this.SIGN_UP).click();
+        wait.until(ExpectedConditions.elementToBeClickable(SIGN_UP)).click();
     }
 
-    @Step("Проверка видна ли кнопка войти")
+    @Step("Проверка видна ли кнопка 'Войти'")
     public boolean isLoginButtonDisplayed() {
         try {
-            return webDriver.findElement(LOGIN_BUTTON).isDisplayed();
-        } catch (NoSuchElementException e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+            return true;
+        } catch (Exception e) {
             return false;
         }
     }
 
-    @Step("Вовод email")
-    public void enterEmail(String email){
-        webDriver.findElement(EMAIL_ON_LOGIN_PAGE).sendKeys(email);
+    @Step("Ввод email")
+    public void enterEmail(String email) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(EMAIL_ON_LOGIN_PAGE)).sendKeys(email);
     }
 
-    @Step("ввод пароля")
-    public void enterPassword(String password){
-        webDriver.findElement(PASSWORD_ON_LOGIN_PAGE).sendKeys(password);
+    @Step("Ввод пароля")
+    public void enterPassword(String password) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_ON_LOGIN_PAGE)).sendKeys(password);
     }
 
-    @Step("клик кнопки войти")
-    public void cliclLoginButton(){
-        webDriver.findElement(LOGIN_BUTTON).click();
+
+    @Step("Клик по кнопке 'Войти'")
+    public void clickLoginButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(LOGIN_BUTTON)).click();
     }
 
-    @Step("Клик кнопки восстановить пароль")
-    public void clickForgotPasswordButton(){
-        webDriver.findElement(FORGOT_PASSWORD_BUTTON).click();
+    @Step("Клик по кнопке 'Восстановить пароль'")
+    public void clickForgotPasswordButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(FORGOT_PASSWORD_BUTTON)).click();
+    }
+
+    @Step("автозаполнение формы регистрации")
+    public void createClient(ClientModel client) {
+        enterEmail(client.getEmail());
+        enterPassword(client.getPassword());
+        clickLoginButton();
+
     }
 
 }
