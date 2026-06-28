@@ -1,7 +1,6 @@
 import io.qameta.allure.junit4.DisplayName;
-import org.junit.Before;
 import org.junit.Test;
-import page.MainPage;
+
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +16,6 @@ public class ConstructorNavigationTest extends BaseUiTest{
 
     public void bunTabNavigationTest(){
 
-        mainPage.clickConstructorSauceTab();
         mainPage.clickConstructorBunTab();
 
         assertEquals("Булки", mainPage.getActiveTabName());
