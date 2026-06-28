@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ConstructorNavigationTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.993 s - in ConstructorNavigationTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.904 s - in ConstructorNavigationTest
