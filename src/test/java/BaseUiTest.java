@@ -31,6 +31,7 @@ public class BaseUiTest {
     protected LoginPage loginPage;
     protected SignUpPage signUpPage;
     protected WebDriverWait wait;
+    protected boolean needClient = true;
 
     @Before
 
@@ -55,8 +56,11 @@ public class BaseUiTest {
         loginPage = new LoginPage(webDriver);
         signUpPage = new SignUpPage(webDriver);
     }
+@Before
 
-    protected void createClientBefore() {
+    public void createClientBefore() {
+    if (needClient) {
+
         client = generateRandomUser();
 
         clientResponse = createClient(client)
@@ -67,6 +71,7 @@ public class BaseUiTest {
 
         accessToken = clientResponse.jsonPath().getString("accessToken");
     }
+}
 
     @After
     public void deleteClientAfterTest() {

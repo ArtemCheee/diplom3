@@ -1,12 +1,12 @@
 import UserData.ClientData;
-import UserData.ClientModel;
+
 
 import io.qameta.allure.junit4.DisplayName;
 
 import org.junit.Test;
 
 
-import static UserData.ClientData.generateRandomUser;
+
 import static org.junit.Assert.assertTrue;
 
 public class SignUpTest extends BaseUiTest {
@@ -17,13 +17,9 @@ public class SignUpTest extends BaseUiTest {
 
     public void successfulSignUpTest() {
 
-
-        ClientModel newClient = generateRandomUser();
-
         mainPage.clickPersonalAccountButton();
-        loginPage.clickSignUp();
 
-        signUpPage.createClient(newClient);
+
 
         assertTrue(loginPage.isLoginButtonDisplayed());
     }

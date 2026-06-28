@@ -13,9 +13,7 @@ public class LoginTest extends BaseUiTest{
    public void loginByMainPageLoginButtonTest() {
 
        createClientBefore();
-
        webDriver.get(BaseUiTest.MAIN_PAGE);
-
        mainPage.clickMainPageLoginButton();
 
        loginPage.createClient(client);
@@ -32,8 +30,6 @@ public class LoginTest extends BaseUiTest{
 
         createClientBefore();
 
-        webDriver.get(BaseUiTest.MAIN_PAGE);
-
         mainPage.clickPersonalAccountButton();
 
         loginPage.createClient(client);
@@ -48,10 +44,8 @@ public class LoginTest extends BaseUiTest{
 
     public void loginBysignUpPageLoginButtonTest() {
 
-        createClientBefore();
 
         webDriver.get(BaseUiTest.MAIN_PAGE);
-
 
         mainPage.clickPersonalAccountButton();
         loginPage.clickSignUp();
@@ -68,10 +62,6 @@ public class LoginTest extends BaseUiTest{
     @DisplayName("вход через кнопку в форме восстановления пароля")
 
     public void loginByForgotPasswordButtonTest() {
-
-        createClientBefore();
-
-        webDriver.get(BaseUiTest.MAIN_PAGE);
 
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(webDriver);
 
