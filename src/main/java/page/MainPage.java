@@ -2,7 +2,9 @@ package page;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -57,17 +59,20 @@ public class MainPage {
 
     @Step("Клик по вкладке 'Булки' в конструкторе")
     public void clickConstructorBunTab() {
-        wait.until(ExpectedConditions.elementToBeClickable(CONSTRUCTOR_BUN_TAB)).click();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(CONSTRUCTOR_BUN_TAB));
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].click();", element);
     }
 
     @Step("Клик по вкладке 'Соусы' в конструкторе")
     public void clickConstructorSauceTab() {
-        wait.until(ExpectedConditions.elementToBeClickable(CONSTRUCTOR_SAUCE_TAB)).click();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(CONSTRUCTOR_SAUCE_TAB));
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].click();", element);
     }
 
     @Step("Клик по вкладке 'Начинки' в конструкторе")
     public void clickConstructorFillingsTab() {
-        wait.until(ExpectedConditions.elementToBeClickable(CONSTRUCTOR_FILLINGS_TAB)).click();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(CONSTRUCTOR_FILLINGS_TAB));
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].click();", element);
     }
 
     @Step("Получение текста активной вкладки")
