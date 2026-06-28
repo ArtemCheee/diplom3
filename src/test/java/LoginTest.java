@@ -12,8 +12,6 @@ public class LoginTest extends BaseUiTest{
 
    public void loginByMainPageLoginButtonTest() {
 
-       createClientBefore();
-       webDriver.get(BaseUiTest.MAIN_PAGE);
        mainPage.clickMainPageLoginButton();
 
        loginPage.createClient(client);
@@ -28,8 +26,6 @@ public class LoginTest extends BaseUiTest{
 
     public void loginByMainPagePersonalAccountButtonTest(){
 
-        createClientBefore();
-
         mainPage.clickPersonalAccountButton();
 
         loginPage.createClient(client);
@@ -43,9 +39,6 @@ public class LoginTest extends BaseUiTest{
     @DisplayName("вход через кнопку в форме регистрации")
 
     public void loginBysignUpPageLoginButtonTest() {
-
-
-        webDriver.get(BaseUiTest.MAIN_PAGE);
 
         mainPage.clickPersonalAccountButton();
         loginPage.clickSignUp();

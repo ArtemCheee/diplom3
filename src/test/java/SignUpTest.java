@@ -19,8 +19,6 @@ public class SignUpTest extends BaseUiTest {
 
         mainPage.clickPersonalAccountButton();
 
-
-
         assertTrue(loginPage.isLoginButtonDisplayed());
     }
 
